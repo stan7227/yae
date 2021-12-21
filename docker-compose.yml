@@ -3,6 +3,8 @@ version: '3.8'
 services:
   db:
     image: postgres:14.1-alpine
+    env_file:
+      - .env
     environment:
       TZ: UTC
       PGTZ: UTC
@@ -13,6 +15,8 @@ services:
   api:
     build:
       context: ./api
+      env_file:
+        - .env
       args:
         WORKDIR: $WORKDIR
     environment:
@@ -27,6 +31,8 @@ services:
   front:
     build:
       context: ./front
+      env_file:
+        - .env
       args:
         WORKDIR: $WORKDIR
     command: yarn run dev
