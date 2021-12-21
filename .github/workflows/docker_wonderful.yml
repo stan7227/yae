@@ -28,7 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gem-
       - name: Install gems
-        run: docker-compose build
+        run: docker-compose run --rm api bundle install --path vendor/bundle --jobs 4
       - name: Setup Database
         run: |
           cp -v config/database.yml.ci config/database.yml
