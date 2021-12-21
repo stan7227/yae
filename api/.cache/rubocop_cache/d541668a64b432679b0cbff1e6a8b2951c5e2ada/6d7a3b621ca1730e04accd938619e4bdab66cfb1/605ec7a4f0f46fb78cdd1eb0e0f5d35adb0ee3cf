@@ -1,0 +1,1 @@
+[{"severity":"convention","location":{"begin_pos":73,"end_pos":94},"message":"Style/TrailingCommaInArguments: Put a comma after the last parameter of a multiline method call.","cop_name":"Style/TrailingCommaInArguments","status":"uncorrected"}]
