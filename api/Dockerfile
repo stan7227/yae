@@ -8,7 +8,6 @@ ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
 
-# ENV test（このRUN命令は確認のためなので無くても良い）
 
 WORKDIR ${HOME}
 
