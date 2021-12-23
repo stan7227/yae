@@ -11,7 +11,8 @@ ENV HOME=/${WORKDIR} \
 
 WORKDIR ${HOME}
 
-COPY Gemfile* ./
+COPY Gemfile ${HOME}/Gemfile
+COPY Gemfile.lock ${HOME}/Gemfile.lock
 
 RUN apk update && \
     apk upgrade && \
