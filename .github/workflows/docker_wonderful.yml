@@ -26,9 +26,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gem-
       - name: Setup docker
-    　  shell: bash
-      　run: |
-        　docker-compose build
+        shell: bash
+        run: |
+          docker-compose build
       - name: Setup Database
         run: |
           cp -v api/config/database.yml.ci api/config/database.yml
