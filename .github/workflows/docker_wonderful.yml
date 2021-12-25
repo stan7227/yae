@@ -1,44 +1,21 @@
 name: Lint & Test
+
 on: [push]
 jobs:
-  execute:
+  #rspecの実行
+  rspec: #名前は何でも良いです
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:12
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
     steps:
-      - name: Git checkout
-        uses: actions/checkout@v2
-      - name: Setup Ruby 2.7.2
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7.2
-      - name: Setup bundler
-        run: gem install bundler
-      - name: Cache gems
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gem-
-      - name: Install gems
-        run: docker-compose build
-      - name: Setup Database
+      - uses: actions/checkout@v2
+      - name: Setup docker
+        shell: bash
         run: |
-          cp -v api/config/database.yml.ci api/config/database.yml
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
+          docker-compose build
+          docker-compose run web rails db:create
         env:
           RAILS_ENV: test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-      - name: Rubocop
-        run: docker-compose run --rm api bundle exec rubocop --parallel
-      - name: RSpec
-        run: docker-compose run --rm api bundle exec rspec
+      - name: Rspec
+        run: |
+          docker-compose run web bundle exec rspec
+        env:
+          RAILS_ENV: test
