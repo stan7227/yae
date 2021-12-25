@@ -32,7 +32,7 @@ jobs:
       - name: Setup Database
         run: |
           cp -v api/config/database.yml.ci api/config/database.yml
-          docker-compose run --rm api bundle exec rails db:create
+          docker-compose run --rm api bundle exec rails db:create RAILS_ENV=development
           docker-compose run --rm api bundle exec rails db:schema:load
         env:
           RAILS_ENV: test
