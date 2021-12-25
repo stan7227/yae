@@ -11,11 +11,11 @@ jobs:
         shell: bash
         run: |
           docker-compose build
-          docker-compose run web rails db:create
+          docker-compose run api rails db:create
         env:
           RAILS_ENV: test
       - name: Rspec
         run: |
-          docker-compose run web bundle exec rspec
+          docker-compose run api bundle exec rspec
         env:
           RAILS_ENV: test
