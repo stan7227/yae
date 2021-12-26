@@ -18,7 +18,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: app_test
     #自身のアプリ名にする
-    working_directory: api
+    working_directory: ~/docker_wonderful/api
     steps:
       - checkout
       #bundle キャッシュをリストアする。公式の設定通り。
