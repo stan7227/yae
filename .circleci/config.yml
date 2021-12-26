@@ -31,7 +31,8 @@ jobs:
           name: install dependencies
           command: |
             gem install bundler
-            bundle install --path docker_wonderful/api
+            bundle config set --local path 'docker_wonderful/api'
+            bundle install
 
       # bundle キャッシュを保存する。公式の設定通り。
       - save_cache:
