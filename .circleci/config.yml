@@ -21,22 +21,22 @@ jobs:
     working_directory: ~/docker_wonderful/api
     steps:
       - checkout
+          path: ~/docker_wonderful
       #bundle キャッシュをリストアする。公式の設定通り。
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "api/Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       # bundle install で依存関係をインストールする。公式の設定と多少異なってます。
       - run:
           name: install dependencies
           command: |
             gem install bundler
-            bundle config set --local path 'docker_wonderful/api'
             bundle install
 
       # bundle キャッシュを保存する。公式の設定通り。
       - save_cache:
-          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
 
