@@ -18,7 +18,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: app_test
     #自身のアプリ名にする
-    working_directory: ~/docker_wonderful/api
+    working_directory: ~/api
     steps:
       - checkout
       #bundle キャッシュをリストアする。公式の設定通り。
@@ -29,7 +29,7 @@ jobs:
       # bundle install で依存関係をインストールする。公式の設定と多少異なってます。
       - run:
           name: install dependencies
-          warking_directory: ~/docker_wonderful/api
+          warking_directory: ~/api
           command: |
             gem install bundler
             bundle install
