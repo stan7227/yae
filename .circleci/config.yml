@@ -31,7 +31,7 @@ jobs:
           name: install dependencies
           command: |
             gem install bundler
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            docker-compose build
 
       # bundle キャッシュを保存する。公式の設定通り。
       - save_cache:
@@ -44,8 +44,8 @@ jobs:
           name: DBの起動を待つ
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
 
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load
 
       # rspecを実行する
       - run:
