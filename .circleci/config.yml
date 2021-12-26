@@ -1,42 +1,57 @@
-version: 2
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.0
+  node: circleci/node@2
+
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.2
-        environment:
-          POSTGRES_USER: postgres
-          PGHOST: 127.0.0.1
-          RAILS_ENV: test
-      - image: circleci/postgres:latest-postgis
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: app_test
-    working_directory: ~/docker_wonderful
+      - image: cimg/ruby:2.7-node
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+      - ruby/install-deps
+      # Store bundle cache
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: 'yarn.lock'
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:2.7-node
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: docker_wonderful
+          POSTGRES_DB: app_test
+          POSTGRES_PASSWORD: ''
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      PGHOST: 127.0.0.1
+      PGUSER: docker_wonderful
+      PGPASSWORD: ''
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: 'yarn.lock'
       - run:
-          name: install dependencies
-          command: |
-            gem install bundler -v 2.1.4
-            bundle install --path vendor/bundle --jobs 4
-
-      - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-          paths:
-            - ./vendor/bundle
-
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: DBの起動を待つ
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - ruby/rspec-test
+      - ruby/rubocop-check
 
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-
-      - run:
-          name: rspecを実行
-          command: bundle exec rspec
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
