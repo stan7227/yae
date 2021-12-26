@@ -8,11 +8,11 @@ ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
 
-# ENV test（このRUN命令は確認のためなので無くても良い）
 
 WORKDIR ${HOME}
 
-COPY Gemfile* ./
+COPY Gemfile ${HOME}/Gemfile
+COPY Gemfile.lock ${HOME}/Gemfile.lock
 
 RUN apk update && \
     apk upgrade && \
