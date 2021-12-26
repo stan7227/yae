@@ -18,6 +18,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.2
+      - name: Setup bundler
+        run: gem install bundler
       - name: Cache gems
         uses: actions/cache@v1
         with:
@@ -25,20 +27,18 @@ jobs:
           key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gem-
-      - name: Setup docker
-        shell: bash
-        run: |
-          docker-compose build
+      - name: Install gems
+        run: bundle install --path vendor/bundle --jobs 4
       - name: Setup Database
         run: |
-          cp -v api/config/database.yml.ci api/config/database.yml
-          docker-compose run --rm api bundle exec rails db:create RAILS_ENV=test
-          docker-compose run --rm api bundle exec rails db:schema:load
+          cp -v config/database.yml.ci config/database.yml
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
       - name: Rubocop
-        run: docker-compose run --rm api bundle exec rubocop --parallel
+        run: bundle exec rubocop --parallel
       - name: RSpec
-        run: docker-compose run --rm api bundle exec rspec
+        run: bundle exec rspec
