@@ -29,6 +29,7 @@ jobs:
       # bundle install で依存関係をインストールする。公式の設定と多少異なってます。
       - run:
           name: install dependencies
+          warking_directory: ~/docker_wonderful/api
           command: |
             gem install bundler
             bundle install
