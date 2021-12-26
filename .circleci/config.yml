@@ -22,7 +22,6 @@ jobs:
 
     steps:
       - checkout
-          path: ~/docker_wonderful
       #bundle キャッシュをリストアする。公式の設定通り。
       - restore_cache:
           keys:
