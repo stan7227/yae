@@ -31,7 +31,7 @@ jobs:
           name: install dependencies
           command: |
             gem install bundler -v 2.1.4
-            bundle install
+            bundle install --path vendor/bundle --jobs 4
 
       # bundle キャッシュを保存する。公式の設定通り。
       - save_cache:
