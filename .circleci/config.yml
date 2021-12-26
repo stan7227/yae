@@ -24,7 +24,7 @@ jobs:
       #bundle キャッシュをリストアする。公式の設定通り。
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "api/Gemfile.lock" }}
             - v1-dependencies-
       # bundle install で依存関係をインストールする。公式の設定と多少異なってます。
       - run:
@@ -35,7 +35,7 @@ jobs:
 
       # bundle キャッシュを保存する。公式の設定通り。
       - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
             - ./vendor/bundle
 
