@@ -1,0 +1,1 @@
+[{"severity":"convention","location":{"begin_pos":711,"end_pos":727},"message":"RSpec/MultipleExpectations: Example has too many expectations [4/1].","cop_name":"RSpec/MultipleExpectations","status":"unsupported"}]
