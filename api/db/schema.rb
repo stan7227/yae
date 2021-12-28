@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_12_27_114216) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.string "titile"
+    t.string "title"
     t.text "body"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
