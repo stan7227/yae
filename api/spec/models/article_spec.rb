@@ -1,28 +1,40 @@
-# require "rails_helper"
+# == Schema Information
+#
+# Table name: articles
+#
+#  id         :bigint           not null, primary key
+#  body       :text
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+require "rails_helper"
 
-# RSpec.describe Article, type: :model do
+RSpec.describe "Api::V1::Articles", type: :request do
+  describe "GET /articles" do
+    subject { get(api_v1_articles_path) }
 
-#   context "titleとbodyが記入されているとき" do
-#     let(:article) { build(:article) }
+    let!(:article1) { create(:article, updated_at: 1.days.ago) }
+    let!(:article2) { create(:article, updated_at: 2.days.ago) }
+    let!(:article3) { create(:article) }
 
-#     it "記事を投稿できる" do
-#       expect(article).to be_valid
-#     end
-#   end
+    it "記事の一覧が取得できる" do
+      subject
+      res = JSON.parse(response.body)
 
-#   context "titleが記入されていないとき" do
-#     let(:article) { build(:article, title: nil) }
-
-#     it "エラーが発生する" do
-#       expect(article).not_to be_valid
-#     end
-#   end
-
-#   context "bodyが記入されていないとき" do
-#     let(:article) { build(:article, body: nil) }
-
-#     it "エラーが発生する" do
-#       expect(article).not_to be_valid
-#     end
-#   end
-# end
+      expect(response).to have_http_status(:ok)
+      expect(res.length).to eq 3
+      expect(res.map {|d| d["id"] }).to eq [article3.id, article1.id, article2.id]
+      expect(res[0]["user"].keys).to eq ["id", "name", "email"]
+    end
+  end
+end
