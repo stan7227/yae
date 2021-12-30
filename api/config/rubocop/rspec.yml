@@ -38,6 +38,9 @@ RSpec/ImplicitExpect:
 RSpec/InstanceVariable:
   Enabled: false
 
+RSpec/LetSetup:
+  Enabled: false
+
 # spec_helper で meta[:aggregate_failures] を設定することで
 # aggregate_failures が全ての spec で有効になる。
 #
