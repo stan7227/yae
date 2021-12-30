@@ -24,6 +24,8 @@ services:
       - db
     ports:
       - '$API_PORT:3000'
+    tty: true
+    stdin_open: true
 
   front:
     build:
