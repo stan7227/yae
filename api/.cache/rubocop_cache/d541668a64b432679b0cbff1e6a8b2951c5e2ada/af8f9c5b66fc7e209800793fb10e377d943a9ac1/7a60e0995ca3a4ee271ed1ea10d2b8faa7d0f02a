@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":1628,"end_pos":1677},"message":"Rails/UniqueValidationWithoutIndex: Uniqueness validation should have a unique index on the database column.","cop_name":"Rails/UniqueValidationWithoutIndex","status":"unsupported"}]

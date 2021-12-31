@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":61,"end_pos":62},"message":"Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.","cop_name":"Layout/EmptyLinesAroundBlockBody","status":"uncorrected"}]

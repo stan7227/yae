@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":52,"end_pos":60},"message":"Layout/IndentationWidth: Use 2 (not 8) spaces for indentation.","cop_name":"Layout/IndentationWidth","status":"uncorrected"}]
