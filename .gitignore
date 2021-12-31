@@ -64,3 +64,5 @@ yarn-debug.log*
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+/.cache/rubocop_cache
+/.local/share/pry
