@@ -7,12 +7,8 @@
         </v-toolbar-title>
       </nuxt-link>
       <v-spacer />
-      <v-btn text :class="$style.register">
-        ユーザー登録
-      </v-btn>
-      <v-btn text :class="$style.login">
-        ログイン
-      </v-btn>
+      <v-btn text :class="$style.register"> ユーザー登録 </v-btn>
+      <v-btn text :class="$style.login"> ログイン </v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid :class="$style.container">
