@@ -33,3 +33,20 @@ res = JSON.parse(response.body)
 res
 res["errors"]
 exit
+user
+response.headers
+headers
+response.headers
+headers
+exit
+respoinse
+response
+response.body
+res = response.body
+res["errors"
+  exit
+res = response.body
+res["errors"]
+response
+JSON.parse(response.body)
+exit
