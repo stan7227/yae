@@ -22,3 +22,14 @@ res["id"]
 article.id
 exit
 continue
+res
+JSON.parse(response.body)
+exit
+res
+response
+response.body
+JSON.parse(response.body)
+res = JSON.parse(response.body)
+res
+res["errors"]
+exit
