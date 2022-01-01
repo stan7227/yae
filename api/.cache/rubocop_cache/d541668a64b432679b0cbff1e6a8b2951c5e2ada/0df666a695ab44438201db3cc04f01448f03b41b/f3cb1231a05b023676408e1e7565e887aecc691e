@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":267,"end_pos":295},"message":"Rails/RakeEnvironment: Include `:environment` task as a dependency for all Rake tasks.","cop_name":"Rails/RakeEnvironment","status":"uncorrected"}]

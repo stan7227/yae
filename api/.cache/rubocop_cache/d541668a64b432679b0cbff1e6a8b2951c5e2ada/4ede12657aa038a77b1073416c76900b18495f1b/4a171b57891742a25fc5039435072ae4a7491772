@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":1177,"end_pos":1195},"message":"Rails/ApplicationRecord: Models should subclass `ApplicationRecord`.","cop_name":"Rails/ApplicationRecord","status":"uncorrected"}]
