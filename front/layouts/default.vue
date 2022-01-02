@@ -2,13 +2,13 @@
   <v-app>
     <v-app-bar app dark color="#3085DE">
       <nuxt-link to="/" :class="$style.header_link">
-        <v-toolbar-title :class="$style.app_title">
-          DockerWonderful
+        <v-toolbar-title :class="$style.app_title"
+          >DockerWonderful
         </v-toolbar-title>
       </nuxt-link>
-      <v-spacer />
-      <v-btn text :class="$style.register"> ユーザー登録 </v-btn>
-      <v-btn text :class="$style.login"> ログイン </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn text :class="$style.register">ユーザー登録</v-btn>
+      <v-btn text :class="$style.login">ログイン</v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid :class="$style.container">
