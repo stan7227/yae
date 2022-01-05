@@ -14,11 +14,16 @@ WORKDIR ${HOME}
 COPY Gemfile ${HOME}/Gemfile
 COPY Gemfile.lock ${HOME}/Gemfile.lock
 
+COPY package.json .
+COPY yarn.lock .
+
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache ${RUNTIME_PACKAGES} && \
     apk add --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
+    apk add --no-cache yarn tzdata libxml2-dev curl-dev make gcc libc-dev g++ imagemagick6-dev && \
     bundle install -j4 && \
+    yarn install && \
     apk del build-dependencies
 
 COPY . ./
