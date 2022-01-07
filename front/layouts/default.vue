@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="#3085DE">
+    <v-app-bar app dark color="#66cdaa">
       <nuxt-link to="/" :class="$style.header_link">
         <v-toolbar-title :class="$style.app_title"
           >DockerWonderful
