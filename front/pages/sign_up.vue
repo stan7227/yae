@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="$style.layout">
+    <v-row :class="$style.layout">
       <v-col cols="8">
         <h2 class="mb-5">ユーザー登録</h2>
         <v-form>
@@ -32,7 +32,7 @@
             class="mb-10"
           />
           <v-btn
-            color="#66cdaa"
+            color="#f08080"
             block
             rounded
             depressed
@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style module lang="scss">
+<style lang="scss" module>
 .layout {
   background: #fff;
   margin: 20px auto 0;
