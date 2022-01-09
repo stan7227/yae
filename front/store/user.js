@@ -26,4 +26,18 @@ export const actions = {
 
     commit('setHeaders', loginInfoHeaders)
   },
+
+  async signIn({ commit }, params) {
+    const response = await this.$axios.post('api/v1/auth/sign_in', params)
+    const headers = response.headers
+    const loginInfoHeaders = {
+      'access-token': headers['access-token'],
+      client: headers.client,
+      expiry: headers.expiry,
+      uid: headers.uid,
+      'token-type': headers['token-type'],
+    }
+
+    commit('setHeaders', loginInfoHeaders)
+  },
 }

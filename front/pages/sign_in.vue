@@ -2,17 +2,8 @@
   <v-container>
     <v-row :class="$style.layout">
       <v-col cols="8">
-        <h2 class="mb-5">ユーザー登録</h2>
+        <h2 class="mb-5">ログイン</h2>
         <v-form>
-          <v-text-field
-            v-model="name"
-            dense
-            type="name"
-            label="アカウント名"
-            outlined
-            placeholder="お名前"
-            class="mb-5"
-          />
           <v-text-field
             v-model="email"
             dense
@@ -40,7 +31,7 @@
             :loading="loading"
             class="white--text font-weight-bold"
             @click="submit"
-            >登録</v-btn
+            >ログイン</v-btn
           >
         </v-form>
       </v-col>
@@ -58,20 +49,18 @@ export default {
       password: '',
     }
   },
-
   methods: {
     async submit() {
       this.loading = true
       const params = {
-        name: this.name,
         email: this.email,
         password: this.password,
       }
-
       try {
-        await this.$store.dispatch(`user/signUp`, params)
+        await this.$store.dispatch('user/signIn', params)
         this.$router.push('/')
       } catch (err) {
+        // 暫定的な Error 表示
         alert(err.response.data.errors.full_messages)
       } finally {
         this.loading = false
@@ -81,7 +70,7 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
+<style module lang="scss">
 .layout {
   background: #fff;
   margin: 20px auto 0;
