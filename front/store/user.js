@@ -1,14 +1,24 @@
 export const state = () => ({
   headers: {},
+  isSignedIn: false,
 })
 
 export const getters = {
   headers: (state) => state.headers,
+  isSignedIn: (state) => state.isSignedIn,
 }
 
 export const mutations = {
   setHeaders(state, headers) {
     state.headers = headers
+  },
+
+  setSignInState(state, signInState) {
+    state.isSignedIn = signInState
+  },
+
+  resetHeaders(state) {
+    state.headers = {}
   },
 }
 
@@ -25,6 +35,7 @@ export const actions = {
     }
 
     commit('setHeaders', loginInfoHeaders)
+    commit('setSignInState', true)
   },
 
   async signIn({ commit }, params) {
@@ -39,5 +50,11 @@ export const actions = {
     }
 
     commit('setHeaders', loginInfoHeaders)
+    commit('setSignInState', true)
+  },
+
+  signOut({ commit }) {
+    commit('resetHeaders')
+    commit('setSignInState', false)
   },
 }

@@ -7,8 +7,20 @@
         </v-toolbar-title>
       </nuxt-link>
       <v-spacer></v-spacer>
-      <v-btn text :class="$style.register">ユーザー登録</v-btn>
-      <v-btn text :class="$style.login">ログイン</v-btn>
+      <template v-if="isSignedIn">
+        <nuxt-link to="/" :class="$style.header_link">
+          <v-btn text :class="$style.register">投稿する</v-btn>
+        </nuxt-link>
+        <v-btn text :class="$style.login" @click="signOut">ログアウト</v-btn>
+      </template>
+      <template v-else>
+        <nuxt-link to="/sign_up" :class="$style.header_link">
+          <v-btn text :class="$style.register">ユーザー登録</v-btn>
+        </nuxt-link>
+        <nuxt-link to="/sign_in" :class="$style.header_link">
+          <v-btn text :class="$style.login">ログイン</v-btn>
+        </nuxt-link>
+      </template>
     </v-app-bar>
     <v-main>
       <v-container fluid :class="$style.container">
@@ -17,6 +29,23 @@
     </v-main>
   </v-app>
 </template>
+
+<script>
+export default {
+  computed: {
+    isSignedIn() {
+      return this.$store.getters['user/isSignedIn']
+    },
+  },
+
+  methods: {
+    signOut() {
+      this.$store.dispatch('user/signOut')
+      this.$router.poush('/sign_in')
+    },
+  },
+}
+</script>
 
 <style lang="scss" module>
 .header_link {
