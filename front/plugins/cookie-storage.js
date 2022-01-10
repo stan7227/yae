@@ -15,7 +15,7 @@ export default ({ store, req, isDev }) => {
           : cookie.parse(req.headers.cookie)[key],
       setItem: (key, value) => {
         const cookie = Cookies.set(key, value, {
-          expires: 14, // 14日間有効
+          expires: 14,
           secure: !isDev,
           sameSite: 'lax',
         })
