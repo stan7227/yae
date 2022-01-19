@@ -14,8 +14,13 @@ export const mutations = {
 
 export const actions = {
   async fetchArticles({ commit }) {
-    const response = await this.$axios.get('api/v1/aritlces')
+    const response = await this.$axios.get('api/v1/articles')
+    console.log(response.data)
     const data = response.data
     commit('setArticles', data)
+  },
+
+  async createArticle(_, params) {
+    await this.$axios.post('api/v1/articles', params)
   },
 }
