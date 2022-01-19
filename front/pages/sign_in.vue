@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  middleware: 'before_auth',
   data() {
     return {
       name: '',
@@ -60,7 +61,6 @@ export default {
         await this.$store.dispatch('user/signIn', params)
         this.$router.push('/')
       } catch (err) {
-        // 暫定的な Error 表示
         alert(err.response.data.errors.full_messages)
       } finally {
         this.loading = false
