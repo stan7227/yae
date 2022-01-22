@@ -1,16 +1,18 @@
 <template>
   <v-container class="elevation-3" :class="$style.article_container">
-    <div :class="$style.article_layout">
-      <div :class="$style.name_area">
-        <span>@{{ article.user.name }}</span>
-      </div>
-      <h1 :class="$style.article_title">{{ article.title }}</h1>
-      <div :class="$style.article_body_container">
-        <div :class="$style.article_body">
-          <p>{{ article.body }}</p>
+    <template v-if="isInitialized">
+      <div :class="$style.article_layout">
+        <div :class="$style.name_area">
+          <span>@{{ article.user.name }}</span>
+        </div>
+        <h1 :class="$style.article_title">{{ article.title }}</h1>
+        <div :class="$style.article_body_container">
+          <div :class="$style.article_body">
+            <p>{{ article.body }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </v-container>
 </template>
 
@@ -18,11 +20,24 @@
 export default {
   data() {
     return {
-      article: {
-        title: 'title',
-        body: '本文です',
-        user: { name: 'test' },
-      },
+      isInitialized: false,
+    }
+  },
+
+  computed: {
+    article() {
+      return this.$store.getters['article/article']
+    },
+  },
+
+  async created() {
+    const articleId = this.$route.params.id
+
+    try {
+      await this.$store.dispatch('article/fetchArticle', articleId)
+      this.isInitialized = true
+    } catch (err) {
+      alert(err.response.statusText)
     }
   },
 }
