@@ -11,4 +11,7 @@
 class Task < ApplicationRecord
   validates :title, presence: true, length: { maximum: 80 }
   validates :body, length: { maximum: 100 }
+
+  has_many :user_tasks, dependent: :destroy
+  has_many :user, through: :user_tasks
 end
