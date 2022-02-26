@@ -35,4 +35,8 @@ export const actions = {
 
     commit('setArticle', data)
   },
+
+  async deleteArticle(_, id) {
+    await this.$axios.delete(`api/v1/articles/${id}`)
+  },
 }
