@@ -4,6 +4,12 @@
       <div :class="$style.article_layout">
         <div :class="$style.name_area">
           <span>@{{ article.user.name }}</span>
+          <v-spacer></v-spacer>
+          <template v-if="isShownBtn">
+            <v-btn text fab small @click="deleteArticle">
+              <v-icon color="#3085DE">fas fa-trash-alt</v-icon>
+            </v-btn>
+          </template>
         </div>
         <h1 :class="$style.article_title">{{ article.title }}</h1>
         <div :class="$style.article_body_container">
@@ -28,6 +34,13 @@ export default {
     article() {
       return this.$store.getters['article/article']
     },
+
+    isShownBtn() {
+      const currentUserEmail = this.$store.getters['user/headers'].uid
+      const result = currentUserEmail === this.article?.user?.email
+
+      return result
+    },
   },
 
   async created() {
@@ -39,6 +52,21 @@ export default {
     } catch (err) {
       alert(err.response.statusText)
     }
+  },
+
+  methods: {
+    async deleteArticle() {
+      const result = confirm('この記事を削除してもいいですか？')
+
+      if (result) {
+        try {
+          await this.$store.dispatch('article/deleteArticle', this.article.id)
+          this.$router.push('/')
+        } catch (err) {
+          alert(err.response.statusText)
+        }
+      }
+    },
   },
 }
 </script>
