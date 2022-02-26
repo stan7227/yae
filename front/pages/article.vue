@@ -1,12 +1,12 @@
 <template>
   <form id="writing-article" :class="$style.article_form">
-    <h2 :class="$style.h2">記事作成</h2>
+    <h2 :class="$style.h2">現場登録</h2>
     <v-text-field
       v-model="title"
       outlined
       single-line
       name="title"
-      placeholder="タイトル"
+      placeholder="現場名"
       :class="$style.title_form"
     ></v-text-field>
     <div :class="$style.edit_area">
@@ -17,7 +17,7 @@
         hide-details
         height="100%"
         name="body"
-        placeholder="記事の内容を入力してください"
+        placeholder="現場の内容を入力してください"
         class="body-form"
       ></v-textarea>
     </div>
@@ -27,7 +27,7 @@
         :loading="loading"
         class="font-weight-bold white--text"
         @click="createArticle"
-        >記事を投稿
+        >登録
       </v-btn>
     </div>
   </form>

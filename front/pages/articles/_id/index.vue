@@ -2,15 +2,20 @@
   <v-container class="elevation-3" :class="$style.article_container">
     <template v-if="isInitialized">
       <div :class="$style.article_layout">
-        <div :class="$style.name_area">
-          <span>@{{ article.user.name }}</span>
+        <v-layout :class="$style.name_area">
+          <span :class="$style.user_name">@{{ article.user.name }}</span>
+          <timeago
+            :class="$style.time_ago"
+            :datetime="article.updated_at"
+            :auto-update="60"
+          />
           <v-spacer></v-spacer>
           <template v-if="isShownBtn">
             <v-btn text fab small @click="deleteArticle">
               <v-icon color="#3085DE">fas fa-trash-alt</v-icon>
             </v-btn>
           </template>
-        </div>
+        </v-layout>
         <h1 :class="$style.article_title">{{ article.title }}</h1>
         <div :class="$style.article_body_container">
           <div :class="$style.article_body">
@@ -45,13 +50,9 @@ export default {
 
   async created() {
     const articleId = this.$route.params.id
-
-    try {
-      await this.$store.dispatch('article/fetchArticle', articleId)
+    await this.$store.dispatch('article/fetchArticle', articleId).then(() => {
       this.isInitialized = true
-    } catch (err) {
-      alert(err.response.statusText)
-    }
+    })
   },
 
   methods: {
