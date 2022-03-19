@@ -36,7 +36,7 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # preload_app!
 
 # 追加
-app_root = File.expand_path('..', __dir__)
+app_root = File.expand_path("..", __dir__)
 bind "unix://#{app_root}/tmp/sockets/puma.sock"
 
 # Allow puma to be restarted by `rails restart` command.
