@@ -40,5 +40,21 @@ services:
       - './front:/$WORKDIR'
     ports:
       - '$FRONT_PORT:3000'
+    # depends_on:
+    #   - api
+
+  web:
+    build:
+      context: ./nginx
+    volumes:
+      - public-data:/app/public
+      - tmp-data:/app/tmp
+    ports:
+      - 80:80
     depends_on:
       - api
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
