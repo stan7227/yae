@@ -16,6 +16,7 @@ services:
   api:
     build:
       context: ./api
+      # dockerfile: Dockerfile
       args:
         WORKDIR: $WORKDIR
     environment:
