@@ -9,9 +9,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # origins Settings.frontend.url
     if Rails.env.production?
-      origins 'https://static.yaesite.work'
+      origins "https://static.yaesite.work"
     else
-      origins 'http://localhost:8080'
+      origins "http://localhost:8080"
     end
     resource "*",
              headers: :any,
