@@ -7,7 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Settings.frontend.url
+    # origins Settings.frontend.url
+    if Rails.env.production?
+      origins "https://static.yaesite.work"
+    else
+      origins "http://localhost:8080"
+    end
     resource "*",
              headers: :any,
              expose: ["access-token", "expiry", "token-type", "uid", "client"],
