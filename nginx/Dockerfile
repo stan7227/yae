@@ -1,5 +1,8 @@
 FROM nginx:alpine
 
+VOLUME /app/public
+VOLUME /app/tmp
+
 RUN rm -f /etc/nginx/conf.d/*
 
 ADD nginx.conf /etc/nginx/app.conf

@@ -17,7 +17,7 @@
         hide-details
         height="100%"
         name="body"
-        placeholder="現場の内容を入力してください"
+        placeholder="現場の内容を入力して"
         class="body-form"
       ></v-textarea>
     </div>

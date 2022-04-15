@@ -3,7 +3,6 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -92,6 +91,11 @@ export default {
       if (ctx.isDev && ctx.isClient) {
         config.devtool = 'inline-cheap-module-source-map'
       }
+    },
+    watchers: {
+      webpack: {
+        poll: true,
+      },
     },
   },
 }
