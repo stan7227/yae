@@ -24,6 +24,9 @@ services:
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - './api:/$WORKDIR'
+      - 'public-data:/$WORKDIR/public'
+      - 'tmp-data:/$WORKDIR/tmp'
+      - 'log-data:/$WORKDIR/log'
     depends_on:
       - db
     ports:
@@ -41,19 +44,18 @@ services:
       - './front:/$WORKDIR'
     ports:
       - '$FRONT_PORT:3000'
-    # depends_on:
-    #   - api
-
-  web:
-    build:
-      context: ./nginx
-    volumes:
-      - public-data:/app/public
-      - tmp-data:/app/tmp
-    ports:
-      - 80:80
     depends_on:
       - api
+#   web:
+#     build:
+#       context: ./nginx
+#     volumes:
+#       - public-data:/app/public
+#       - tmp-data:/app/tmp
+#     ports:
+#       - 80:80
+#     depends_on:
+#       - api
 volumes:
   public-data:
   tmp-data:

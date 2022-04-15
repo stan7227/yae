@@ -24,11 +24,12 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache python make g++ && \
     yarn install
+# RUN yarn install
 
 COPY . ./
 
-# RUN yarn run build
+RUN /bin/sh -c yarn run build
 
 EXPOSE ${FRONT_PORT}
 
-CMD ["yarn", "run", "start"]
+# CMD ["yarn", "run", "start"]
